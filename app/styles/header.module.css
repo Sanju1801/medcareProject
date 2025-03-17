@@ -1,0 +1,138 @@
+/* Header */
+.header {
+  height: 80px;
+  width: 100%;
+  background: white;
+  padding: 24px 50px;
+}
+
+
+.leftContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Navigation Links */
+.navLinks {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  list-style: none;
+  margin-left: 10px;
+}
+
+.navLinks li {
+  cursor: pointer;
+  color: gray;
+  font-weight: 200;
+}
+
+.navLinks li.active {
+  color: #1C4A2A;
+}
+
+.navLinks li a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.navBtns {
+  display: flex;
+  gap: 8px;
+}
+
+.navBtns a {
+  text-decoration: none;
+}
+
+/* Buttons */
+.btn {
+  border-radius: 8px;
+  margin: 0 8px;
+  padding: 5px 20px;
+  font-weight: 200;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Register Button */
+.registerBtn {
+  background-color: #1C4A2A;
+  color: white;
+  border: none;
+}
+
+.registerBtn:hover {
+  background-color: #145A32;
+}
+
+/* Login Button */
+.loginBtn {
+  border: 1px solid gray;
+  background: none;
+  color: black;
+}
+
+.loginBtn:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+/* Hamburger Icon */
+.menuIcon {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* Mobile Navigation */
+@media (max-width: 768px) {
+  .header {
+      padding: 16px;
+  }
+
+  .nav {
+      flex-direction: row;
+      justify-content: space-between;
+  }
+
+  .menuIcon {
+      display: block;
+  }
+
+  .navLinks {
+      display: none;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      background: white;
+      position: absolute;
+      top: 80px;
+      left: 0;
+      width: 100%;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px 0;
+  }
+
+  .navLinks.active {
+      display: flex;
+  }
+
+  .navBtns {
+      display: none;
+  }
+
+  /* Mobile-Specific Styling */
+  .booking-container {
+      background-image: none;
+      background-color: #1C4A2A;
+  }
+}
