@@ -1,11 +1,9 @@
-/* Header */
 .header {
   height: 80px;
   width: 100%;
   background: white;
   padding: 24px 50px;
 }
-
 
 .leftContainer {
   display: flex;
@@ -21,7 +19,6 @@
   width: 100%;
 }
 
-/* Navigation Links */
 .navLinks {
   display: flex;
   align-items: center;
@@ -44,38 +41,34 @@
   text-decoration: none;
   color: inherit;
 }
+.navBtns a {
+  text-decoration: none;
+}
 
 .navBtns {
   display: flex;
   gap: 8px;
 }
 
-.navBtns a {
-  text-decoration: none;
-}
-
-/* Buttons */
 .btn {
   border-radius: 8px;
-  margin: 0 8px;
-  padding: 5px 20px;
+  margin: 0 6px;
+  padding: 6px 24px;
   font-weight: 200;
   cursor: pointer;
   transition: 0.3s;
+  border: 1px solid gray;
 }
 
-/* Register Button */
 .registerBtn {
   background-color: #1C4A2A;
   color: white;
-  border: none;
 }
 
 .registerBtn:hover {
   background-color: #145A32;
 }
 
-/* Login Button */
 .loginBtn {
   border: 1px solid gray;
   background: none;
@@ -83,7 +76,7 @@
 }
 
 .loginBtn:hover {
-  background: rgba(0, 0, 0, 0.1);
+  background-color: #1C4A2A;
 }
 
 /* Hamburger Icon */
@@ -128,11 +121,5 @@
 
   .navBtns {
       display: none;
-  }
-
-  /* Mobile-Specific Styling */
-  .booking-container {
-      background-image: none;
-      background-color: #1C4A2A;
   }
 }

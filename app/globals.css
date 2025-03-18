@@ -27,38 +27,45 @@
 
 body {
   font-family: Arial, sans-serif;
-  font-weight: 200;
+  /* display: flex;
+  flex-direction: column; */
 }
 
 /*home page---------------------------*/
-.main-container, .booking-container {
+/* .main-container, .booking-container {
   height: calc(100vh - 80px);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  
   width: 100%;
   display: flex;
   align-items: center;
 }
-.main-container{
+.left-container {
+  background-color: #1C4A2A;
+  width: 50%;
+}
+.right-container{
+  width: 50%;
   background-image: url('/Home_page.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .booking-container {
   background-image: url('/Appointment-booking.png');
 } 
 
-.title-container {
+.left-container {
   margin-left: 50px;
   width: 28%;
   display: flex;
   flex-direction: column;
   gap: 40px;
 }
-.title {
+.title-container {
   color: white;
   font-weight: 200;
 }
-.title h1 {
+.title-container h1 {
   font-size: 2.5rem;
 }
 
@@ -69,7 +76,7 @@ body {
   width: fit-content;
   cursor: pointer;
   font-weight: 200;
-}
+} */
 
 /* login-page----------------------------- */
 .login-page {
@@ -173,7 +180,7 @@ body {
 
 
 /* Footer styles----------------------------- */
-#footer-container {
+/* #footer-container {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -182,7 +189,7 @@ body {
   font-size: small;
   color: gray;
   border-top: 1px solid gray;
-}
+} */
 
 /* Appointments page styles----------------------------- */
 .appointments-container {
@@ -239,42 +246,10 @@ body {
 
 /* Responsive styling for small screens */
 @media (max-width: 768px) {
-  /*
-  .main-container{
-    background-image: none;
-    background-color: #1C4A2A;
-  }
   
-  nav {
-    flex-direction: column;
-    padding: 16px;
-  }
-  
-  #nav-links {
-    flex-direction: row;
-    gap: 12px;
-    align-items: center;
-  }
-  #nav-btns {
-    display: none;
-  } */
-
   .booking-container{
     background-image: none;
     background-color: #1C4A2A;
-  }
-  .title-container {
-    margin: 0 auto;
-  }
-  .title h1 {
-    font-size: 25;
-  }
-
-  .title p {
-    display: none;
-  }
-  #start-btn {
-    padding: 8px;
   }
 
   .search-box {
