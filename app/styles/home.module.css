@@ -47,7 +47,6 @@
   color: black;
 }
 
-/* Right Section */
 .rightContainer {
   width: 50%;
   background-image: url('/Home_page.jpg');
@@ -57,13 +56,13 @@
 }
 
 .booking {
+  width: 50%;
   background-image: url('/Appointment-booking.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .mainContainer {
       flex-direction: column;
@@ -96,9 +95,7 @@
       font-size: 1rem;
   }
 
-  /* Specific mobile adjustments for booking-container */
   .bookingContainer {
-      background-image: none;
       background-color: #1C4A2A;
   }
 }

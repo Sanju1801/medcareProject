@@ -27,10 +27,10 @@ export default function Header() {
                             <Link href="/appointments">Appointments</Link>
                         </li>
                         <li className={pathname === '/blog' ? styles.active : ''}>
-                            <Link href="/blog">Health Blog</Link>
+                            <Link href="/">Health Blog</Link>
                         </li>
                         <li className={pathname === '/reviews' ? styles.active : ''}>
-                            <Link href="/booking">Reviews</Link>
+                            <Link href="/">Reviews</Link>
                         </li>
                     </ul>
                 </div>
