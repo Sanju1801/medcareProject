@@ -18,7 +18,7 @@
     display: flex;
     flex-direction: column;
     border: 1px solid gray;
-    gap: 4px;
+    gap: 6px;
     border-radius: 6px;
     border: 1px solid #e0e8e0;
     background: #fbfbfb;
@@ -28,7 +28,7 @@
 }
 
 .subContainer input[type="radio"] {
-    accent-color: black; /* Change the color of the radio button when checked */
+    accent-color: #1C4A2A; /* Change the color of the radio button when checked */
     appearance: none;
     width: 12px;
     height: 12px;
@@ -46,12 +46,15 @@
 }
 
 .subContainer input[type="radio"]:checked::before {
+    outline: 1px solid #1C4A2A;
+    outline-offset: 3px;
+    border: 2px solid #1C4A2A;
     content: '';
     display: block;
-    width: 4px;
-    height: 4px;
+    width: 5px;
+    height: 5px;
     border-radius: 50%;
-    background: black; 
+    background: #1C4A2A; 
     position: absolute;
     top: 50%;
     left: 50%;

@@ -1,14 +1,13 @@
 import React from "react";
 import styles from "../styles/login_signup.module.css";
-import Image from "next/image";
 import Input_component from "./Input_component";
 import Button_component from "./Button_component";
 import Link from "next/link";
+
 const LoginComponent = () => {
   return (
-    <div >
-      {/* <Image src={'./login.svg'} layout="fill" alt="login" height={0} width={0} className={styles.login_image}/> */}
-      <div className={styles.fields}>
+    <div className={styles.container}>
+      <div className={`${styles.fields} ${styles.loginFields}`}>
         <h6>Login</h6>
         <div >
           <span className={styles.p_tag}>

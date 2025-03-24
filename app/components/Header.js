@@ -15,7 +15,8 @@ export default function Header() {
                 <div className={styles.leftContainer} >
                     {/* Logo */}
                     <div className={styles.logo}>
-                        <Image alt="logo" src="/Logo.png" width={130} height={40} />
+                        <Image className={styles.trust} alt="logo" src="/Trust.png" width={30} height={30} />
+                        <h1>MedCare</h1>
                     </div>
 
                     {/* Navigation Links */}

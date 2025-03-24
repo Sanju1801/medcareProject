@@ -1,13 +1,13 @@
 import Footer from "../components/Footer";
-import styles from "../styles/header.module.css";
-import Link from "next/link";
+import BookingForm from "../components/BookingForm";
+import styles from "../styles/home.module.css";
 
-export default function Home() {
+export default function Booking() {
   return (
     <div>
         <div className={`${styles.mainContainer} ${styles.bookingContainer}`}>
             {/* Left Section */}
-            <div className={styles.leftContainer}>
+            <div className={`${styles.leftContainer} ${styles.bookingTitle}`}>
                 <div className={styles.titleContainer}>
                     <h1>Book Your Next Doctor Visit in Seconds.</h1>
                     <p>CareMate helps you find the best healthcare provider by speciality, location, and more, ensuring you get the care you need.</p>
@@ -16,8 +16,8 @@ export default function Home() {
 
             {/* Right Section */}
             <div className={`${styles.rightContainer} ${styles.booking}`}>
+              <BookingForm />
             </div>
-
         </div>
         <Footer />
     </div>
