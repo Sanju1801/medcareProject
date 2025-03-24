@@ -2,21 +2,21 @@ import React from "react";
 import Image from "next/image";
 import InputComponent from "../components/Input_component";
 import Button_component from "../components/Button_component";
-import styles from '../styles/signup.module.css';
+import styles from '../styles/login_signup.module.css';
 import Link from "next/link";
 
 const SignupComponent = () => {
   return (
-    <div className={styles.signup}>
-      <Image
+    <div>
+      {/* <Image
         src={"./login.svg"}
         layout="fill"
         alt="login"
         height={0}
         width={0}
         className={styles.back_image}
-      />
-      <div className={styles.signup_fields}>
+      /> */}
+      <div className={styles.fields}>
         <h6>Sign Up</h6>
         <div>
           <span className={styles.p_tag}>Already a member?</span>
@@ -25,7 +25,7 @@ const SignupComponent = () => {
           </span> 
         </div>
 
-        <section className={styles.signup_section}>
+        <section className={styles.section}>
           <InputComponent
             LabelName="Name"
             color="rgba(28, 74, 42, 1)"

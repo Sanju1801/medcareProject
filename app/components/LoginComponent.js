@@ -1,13 +1,13 @@
 import React from "react";
-import styles from "../styles/login.module.css";
+import styles from "../styles/login_signup.module.css";
 import Image from "next/image";
 import Input_component from "./Input_component";
 import Button_component from "./Button_component";
 import Link from "next/link";
 const LoginComponent = () => {
   return (
-    <div className={styles.login}>
-      <Image src={'./login.svg'} layout="fill" alt="login" height={0} width={0} className={styles.login_image}/>
+    <div >
+      {/* <Image src={'./login.svg'} layout="fill" alt="login" height={0} width={0} className={styles.login_image}/> */}
       <div className={styles.fields}>
         <h6>Login</h6>
         <div >
@@ -19,7 +19,7 @@ const LoginComponent = () => {
           </span> 
         </div>
         
-        <section className={styles.login_section}>
+        <section className={styles.section}>
           <Input_component
             LabelName="Email"
             color="rgba(28, 74, 42, 1)"
