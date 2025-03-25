@@ -15,7 +15,8 @@ export default function Header() {
                 <div className={styles.leftContainer} >
                     {/* Logo */}
                     <div className={styles.logo}>
-                        <Image alt="logo" src="/Logo.png" width={130} height={40} />
+                        <Image className={styles.trust} alt="logo" src="/Trust.png" width={30} height={30} />
+                        <h1>MedCare</h1>
                     </div>
 
                     {/* Navigation Links */}
@@ -43,11 +44,22 @@ export default function Header() {
                 {/* Buttons */}
                 <div className={styles.navBtns}>
                     <Link href="/login">
-                        <button className={`${styles.btn} ${styles.loginBtn}`}>Login</button>
+                        <button className={`
+                        ${styles.btn} 
+                        ${styles.loginBtn} 
+                        ${pathname === '/login' ? styles.activeBtn : styles.inactiveBtn}
+                        `}>Login</button>
                     </Link>
                     <Link href="/signup">
-                        <button className={`${styles.btn} ${styles.registerBtn}`}>Register</button>
+                        <button className={`
+                        ${styles.btn} 
+                        ${styles.registerBtn} 
+                        ${pathname === '/signup' ? styles.activeBtn : styles.inactiveBtn}
+                        `}>Register</button>
                     </Link>
+                    {/* <Link href="/signup">
+                        <button className={`${styles.btn} ${styles.registerBtn}`}>Register</button>
+                    </Link> */}
                 </div>
             </nav>
         </header>

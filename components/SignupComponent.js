@@ -1,28 +1,21 @@
 import React from "react";
-import Image from "next/image";
-import InputComponent from "../components/Input_component";
-import Button_component from "../components/Button_component";
+import InputComponent from "./Input_component";
+import Button_component from "./Button_component";
 import styles from '../styles/login_signup.module.css';
 import Link from "next/link";
 
 const SignupComponent = () => {
   return (
-    <div>
-      {/* <Image
-        src={"./login.svg"}
-        layout="fill"
-        alt="login"
-        height={0}
-        width={0}
-        className={styles.back_image}
-      /> */}
-      <div className={styles.fields}>
+    <div className={styles.container}>
+
+      <div className={`${styles.fields} ${styles.signupFields}`}>
+
         <h6>Sign Up</h6>
-        <div>
+        <div className={styles.subtilte}>
           <span className={styles.p_tag}>Already a member?</span>
           <span id={styles.signup_route}>
-            <Link href="/login"> Login here.</Link>
-          </span> 
+            <Link href="/login">Login here.</Link>
+          </span>
         </div>
 
         <section className={styles.section}>

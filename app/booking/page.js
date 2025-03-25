@@ -1,11 +1,11 @@
-import Footer from "../components/Footer";
-import styles from "../styles/header.module.css";
-import Link from "next/link";
+import Footer from "@/components/Footer";
+import BookingForm from "@/components/BookingForm";
+import styles from "@/styles/bookingHome.module.css";
 
-export default function Home() {
+export default function Booking() {
   return (
     <div>
-        <div className={`${styles.mainContainer} ${styles.bookingContainer}`}>
+        <div className={styles.mainContainer}>
             {/* Left Section */}
             <div className={styles.leftContainer}>
                 <div className={styles.titleContainer}>
@@ -15,9 +15,9 @@ export default function Home() {
             </div>
 
             {/* Right Section */}
-            <div className={`${styles.rightContainer} ${styles.booking}`}>
+            <div className={styles.rightContainer}>
+              <BookingForm />
             </div>
-
         </div>
         <Footer />
     </div>

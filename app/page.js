@@ -1,4 +1,4 @@
-import styles from "./styles/home.module.css";
+import styles from "@/styles/home.module.css";
 import Link from "next/link";
 
 export default function Home() {
@@ -9,7 +9,7 @@ export default function Home() {
         <div className={styles.titleContainer}>
           <h1>Health in Your Hands.</h1>
           <p>
-            Take control of your healthcare with ease, explore health blogs, and
+            Take control of your healthcare with CareMate. Book appointments with ease, explore health blogs, and
             stay on top of your well-being, all in one place.
           </p>
         </div>
