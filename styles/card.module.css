@@ -3,8 +3,8 @@
     border-radius: 8px;
     background: #F8FCF9;
     padding: 20px;
-    width: 240px;
-    height: 350px;
+    width: 260px;
+    height: 380px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -21,8 +21,9 @@
     border-radius: 50%;
 }
 
-.profile h3 {
+.name {
     font-size: 16;
+    font-weight: 700;
     margin: 20px 0 12px 0;
     color: #0E2515;
     
@@ -36,6 +37,7 @@
 }
 .descTitle {
     display: flex;
+    gap: 2px;
 }
 .rating {
     display: flex;

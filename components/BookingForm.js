@@ -1,7 +1,8 @@
-import Slots from "../components/Slots";
+import Slots from "./Slots";
 import styles from "../styles/bookingForm.module.css";
-import Calendar from "../components/Calendar";
-import Location from "../components/Location";
+import Calendar from "./Calendar";
+import Location from "./Location";
+import Link from "next/link";
 
 export default function BookingForm() {
     return (
@@ -40,7 +41,7 @@ export default function BookingForm() {
                     ]}
                     img_url={"/sunset.png"}
                 />
-                <button className={styles.nextBtn}>Next</button>
+                <button className={styles.nextBtn}><Link href='/patientDetail'>Next</Link></button>
             {/* </div> */}
 
         </div>

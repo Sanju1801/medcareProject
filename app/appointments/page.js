@@ -1,11 +1,19 @@
-import styles from "../styles/appointment.module.css";
-import Footer from "../components/Footer";
-import Search from "../components/Search";
-import Filter from "../components/Filter";
-import Doctor_card from "../components/Doctor_card";
-import Pagination from "../components/Pagination";
+import styles from "@/styles/appointment.module.css";
+import Footer from "@/components/Footer";
+import Search from "@/components/Search";
+import Filter from "@/components/Filter";
+import Doctor_card from "@/components/Doctor_card";
+import Pagination from "@/components/Pagination";
+
+const ITEMS_PER_PAGE = 6;
 
 export default function Appointment() {
+    // const filteredDoctors = [];
+    // const totalPages = Math.ceil(filteredDoctors.length / ITEMS_PER_PAGE); 
+
+    // const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    // const selectedDoctors = filteredDoctors.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+
     return (
         <div className={styles.mainContainer}>
             <Search />

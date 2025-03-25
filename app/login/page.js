@@ -1,6 +1,6 @@
 import React from 'react'
-import LoginComponent from '../components/LoginComponent'
-import styles from "../styles/login_signup.module.css";
+import LoginComponent from '@/components/LoginComponent'
+import styles from "@/styles/login_signup.module.css";
 
 const Login = () => {
   return (

@@ -9,12 +9,12 @@ const LoginComponent = () => {
     <div className={styles.container}>
       <div className={`${styles.fields} ${styles.loginFields}`}>
         <h6>Login</h6>
-        <div >
+        <div className={styles.subtilte}>
           <span className={styles.p_tag}>
             Are you a new member? 
           </span>
           <span id={styles.signup_route}>
-              <Link href="/signup"> Sign up here.</Link>
+              <Link href="/signup">Sign up here.</Link>
           </span> 
         </div>
         

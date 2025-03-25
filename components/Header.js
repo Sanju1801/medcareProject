@@ -44,11 +44,22 @@ export default function Header() {
                 {/* Buttons */}
                 <div className={styles.navBtns}>
                     <Link href="/login">
-                        <button className={`${styles.btn} ${styles.loginBtn}`}>Login</button>
+                        <button className={`
+                        ${styles.btn} 
+                        ${styles.loginBtn} 
+                        ${pathname === '/login' ? styles.activeBtn : styles.inactiveBtn}
+                        `}>Login</button>
                     </Link>
                     <Link href="/signup">
-                        <button className={`${styles.btn} ${styles.registerBtn}`}>Register</button>
+                        <button className={`
+                        ${styles.btn} 
+                        ${styles.registerBtn} 
+                        ${pathname === '/signup' ? styles.activeBtn : styles.inactiveBtn}
+                        `}>Register</button>
                     </Link>
+                    {/* <Link href="/signup">
+                        <button className={`${styles.btn} ${styles.registerBtn}`}>Register</button>
+                    </Link> */}
                 </div>
             </nav>
         </header>

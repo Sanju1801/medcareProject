@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import styles from "../styles/input.module.css";
+import styles from "@/styles/input.module.css";
 
 const InputComponent = ({
   LabelName,

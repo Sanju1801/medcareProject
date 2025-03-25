@@ -1,23 +1,22 @@
 import styles from '../styles/pagination.module.css';
 
-export default function Pagination() {
+export default function Pagination({ currentPage, totalPages, onPageChange }) {
     return (
         <div className={styles.container}>
             <button
             className={styles.btn}
-            // onClick={handlePrevious}
             >
-                Prev
+                ‹ Prev
             </button>
-            <div className={styles.pageNumber}>
-                page 
-            </div>
+
+            <span className={styles.pageInfo}>
+          Page
+        </span>
 
             <button
             className={styles.btn}
-            // onClick={handleNext}
-            >
-                Next
+        >
+                Next ›
             </button>
         </div>
     )

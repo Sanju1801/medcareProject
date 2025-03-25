@@ -1,6 +1,6 @@
 import React from "react";
-import InputComponent from "../components/Input_component";
-import Button_component from "../components/Button_component";
+import InputComponent from "./Input_component";
+import Button_component from "./Button_component";
 import styles from '../styles/login_signup.module.css';
 import Link from "next/link";
 
@@ -9,14 +9,13 @@ const SignupComponent = () => {
     <div className={styles.container}>
 
       <div className={`${styles.fields} ${styles.signupFields}`}>
-        <div className={styles.fieldsContainer}>
-        
+
         <h6>Sign Up</h6>
         <div className={styles.subtilte}>
           <span className={styles.p_tag}>Already a member?</span>
           <span id={styles.signup_route}>
-            <Link href="/login"> Login here.</Link>
-          </span> 
+            <Link href="/login">Login here.</Link>
+          </span>
         </div>
 
         <section className={styles.section}>
@@ -45,7 +44,6 @@ const SignupComponent = () => {
           <Button_component text="Sign Up" color="#1C4A2A" />
           <Button_component text="Reset" color="#C6B09A" />
         </section>
-        </div>
       </div>
     </div>
   );
