@@ -1,5 +1,6 @@
 'use client'
 import react, { useState } from "react";
+import InputComponent from "@/components/Input_component";
 import styles from '@/styles/test.module.css';
 
 export default function test() {
@@ -11,46 +12,62 @@ export default function test() {
         healthInfo: ""
     });
 
-    const handleChange = (e) => {
+    const handleChange = (event) => {
         setFormData({
             ...formData,
-            [e.target.name]: e.target.value
+            [event.target.name]: event.target.value
         });
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = (event) => {
+        event.preventDefault();
         console.log("Patient Data Submitted:", formData);
     };
 
     return (
-        <form onSubmit={handleSubmit} className={styles.formContainer}>
-            <h2 className={styles.heading}>Patient Details Form</h2>
-            <label className={styles.label}>
-                Name:
-                <input type="text" name="name" value={formData.name} onChange={handleChange} className={styles.input} required />
-            </label>
-            <label className={styles.label}>
-                Age:
-                <input type="number" name="age" value={formData.age} onChange={handleChange} className={styles.input} required />
-            </label>
-            <label className={styles.label}>
-                Gender:
-                <select name="gender" value={formData.gender} onChange={handleChange} className={styles.input} required>
-                    <option value="">Select</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
-            </label>
-            <label className={styles.label}>
-                Problem:
-                <input type="text" name="problem" value={formData.problem} onChange={handleChange} className={styles.input} required />
-            </label>
-            <label className={styles.label}>
-                Basic Health Information (Optional):
-                <textarea name="healthInfo" value={formData.healthInfo} onChange={handleChange} className={styles.textarea} rows="3"></textarea>
-            </label>
+        <form onSubmit={handleSubmit} className={styles.container}>
+            <h2 className={styles.heading}>Enter Details:</h2>
+            <section className={styles.section}>
+                <InputComponent
+                    LabelName="Name"
+                    color="rgba(28, 74, 42, 1)"
+                    input_type="text"
+                    img_url="./name.svg"
+                    placeholder_name="Enter Your Name"
+                />
+                <InputComponent
+                    LabelName="Email"
+                    color="rgba(28, 74, 42, 1)"
+                    input_type="email"
+                    img_url="./At sign.svg"
+                    placeholder_name="example@123.com"
+                />
+                <InputComponent
+                    LabelName="Age"
+                    color="rgba(28, 74, 42, 1)"
+                    input_type="number"
+                    img_url="/age.svg"
+                    placeholder_name="Enter Your Age"
+                />
+
+                <label className={styles.label}>
+                    Gender:
+                    <select name="gender" value={formData.gender} onChange={handleChange} className={styles.input} required>
+                        <option value="">Select</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </label>
+                <InputComponent
+                    LabelName="Problem"
+                    color="rgba(28, 74, 42, 1)"
+                    input_type="text"
+                    img_url="/virus.svg"
+                    placeholder_name="Enter Health Problem"
+                />
+            </section>
+
             <button type="submit" className={styles.submitButton}>Submit</button>
         </form>
     );

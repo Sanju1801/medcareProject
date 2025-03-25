@@ -30,7 +30,7 @@ const SignupComponent = () => {
             LabelName="Email"
             color="rgba(28, 74, 42, 1)"
             input_type="email"
-            img_url="./At sign.png"
+            img_url="./At sign.svg"
             placeholder_name="example@123.com"
           />
           <InputComponent
