@@ -81,9 +81,6 @@ const LoginComponent = () => {
             isPasswordFlag = {true} 
           />
           <Button_component text="Login" color="#1C4A2A" onClick={()=> handleLogin()}/>
-          {/* <button onClick={handleLogin} color="#1C4A2A">Login</button>
-          <button onClick={() => { setEmail(""); setPassword(""); }} color="#C6B09A">Reset</button> */}
-
           <Button_component text="Reset" color="#C6B09A" onClick={() => { setEmail(""); setPassword(""); }}/>
           <a href="#"><p className={styles.forgot}>Forgot Password ?</p></a>
         </section>
