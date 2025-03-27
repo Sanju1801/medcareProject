@@ -1,10 +1,52 @@
-import React from "react";
+ //******************* */
+'use client'
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+ //********************************** */
 import styles from "../styles/login_signup.module.css";
 import Input_component from "./Input_component";
 import Button_component from "./Button_component";
 import Link from "next/link";
 
+const URL = "http://localhost:3001/login";
+
 const LoginComponent = () => {
+  //********************* */
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const router = useRouter();
+
+  const handleLogin = async (e) => {
+    console.log('error herre');
+    if (!email || !password) {
+      setError("Both email and password are required.");
+      return;
+    }
+
+    try {
+      const response = await fetch(URL, { 
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      if(response.ok){
+        router.push('/appointments');
+        console.log('pushed successfully');
+      }
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.message || "Login failed");
+      }
+
+    } catch (err) {
+      console.log('error herre3');
+      setError(err.message);
+    }
+  };
+
+  //**************************** */
   return (
     <div className={styles.container}>
       <div className={`${styles.fields} ${styles.loginFields}`}>
@@ -24,18 +66,25 @@ const LoginComponent = () => {
             color="rgba(28, 74, 42, 1)"
             input_type="email"
             img_url="./At sign.svg"
+            value={email}
+            change={setEmail}
             placeholder_name="example@123.com"
           />
           <Input_component
             LabelName="Password"
             color="rgba(28, 74, 42, 1)"
             input_type="password"
+            value={password}
             img_url="./Lock.svg"
+            change={setPassword}
             placeholder_name="Enter Your Password"
             isPasswordFlag = {true} 
           />
-          <Button_component text="Login" color="#1C4A2A" />
-          <Button_component text="Reset" color="#C6B09A" />
+          <Button_component text="Login" color="#1C4A2A" onClick={()=> handleLogin()}/>
+          {/* <button onClick={handleLogin} color="#1C4A2A">Login</button>
+          <button onClick={() => { setEmail(""); setPassword(""); }} color="#C6B09A">Reset</button> */}
+
+          <Button_component text="Reset" color="#C6B09A" onClick={() => { setEmail(""); setPassword(""); }}/>
           <a href="#"><p className={styles.forgot}>Forgot Password ?</p></a>
         </section>
       </div>

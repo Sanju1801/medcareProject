@@ -2,15 +2,15 @@
 import React from "react";
 import styles from "../styles/button.module.css";
 
-const Button_component = ({ text, color }) => {
+const Button_component = ({ text, color, actionType , onClick}) => {
 
   return (
     <div
       className={styles.container}
       role="button"
-      onClick={() => console.log("hello jee")}
       tabIndex={0}
       style={{ backgroundColor: color }} 
+      onClick={onClick}
     >
       <p className={styles.text}>{text}</p>
     </div>

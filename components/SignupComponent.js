@@ -5,6 +5,10 @@ import styles from '../styles/login_signup.module.css';
 import Link from "next/link";
 
 const SignupComponent = () => {
+  const handleGoogleSignup = () => {
+    window.location.href = "http://localhost:3001/google"; 
+  };
+
   return (
     <div className={styles.container}>
 
@@ -42,6 +46,7 @@ const SignupComponent = () => {
             isPasswordFlag={true}
           />
           <Button_component text="Sign Up" color="#1C4A2A" />
+          <Button_component text="Google Signup" color="rgb(97, 180, 228)" actionType="googleSignup"/>
           <Button_component text="Reset" color="#C6B09A" />
         </section>
       </div>
