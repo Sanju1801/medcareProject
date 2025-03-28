@@ -1,8 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 4px;
+  gap: 8px;
   width: 100%;
 }
 
@@ -15,39 +14,49 @@
     /* overflow-x: auto; */
 }
 
+.monthTitle {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.dateWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+
 .navButton {
   background: none;
-  /* border: 1px solid #C9C9C9;
+  border: 1px solid #C9C9C9;
   border-radius: 50%;
-  padding: .1px; */
-  font-size: 20px;
+  padding: 0 6px;
+  font-size: 16px;
   cursor: pointer;
-  color: #333;
   /* padding: 4px; */
+}
+
+.navButton:hover {
+  background: #C9C9C9;
 }
 
 .navButton:hover {
   color: #000;
 }
 
-.monthTitle {
-  font-size: 16px;
-  font-weight: bold;
-}
-
 .dateContainer {
-  display: flex;
-  width: 100%;
-  gap: 8px;
-}
-
-.dateList {
   display: flex;
   gap: 8px;
   overflow-x: auto;
   padding: 2px;
-  overflow: hidden;
+  overflow-x: auto;
   scroll-behavior: smooth;
+  white-space: nowrap;
+}
+
+.dateContainer::-webkit-scrollbar {
+  display: none;
 }
 
 .dateItem {
@@ -58,7 +67,7 @@
   justify-content: center;
   min-width: 80px;
   height: 32px;
-  padding: .5px;
+  padding: 8px;
   border: 1px solid #C9C9C9;
   border-radius: 6px;
   cursor: pointer;
@@ -66,6 +75,7 @@
   color: #313131;
   font-size: 12px;
   font-weight: 500;
+  transition: 0.3s ease;
 }
 
 .dateItem:hover {

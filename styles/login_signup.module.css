@@ -3,8 +3,8 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: calc(100vh - 75px);
-    /* height: 100%; */
+    /* height: calc(100vh - 75px); */
+    height: 100%;
     /* color: rgb(114, 201, 252); */
 }
 
@@ -19,6 +19,7 @@
 .container {
     width: 100%;
     flex-grow: 1;
+    /* height: 100%; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -33,7 +34,7 @@
     padding: 20px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
     flex-grow: 1;
 }
 
@@ -64,6 +65,11 @@
     display: inline-block;
 }
 
+.error {
+    color: red;
+    font-size: 12px;
+}
+
 .section {
     width: 100%;
     display: flex;
@@ -81,17 +87,19 @@
 }
 
 @media (max-width: 768px) {
-    
+    .mainContainer {
+        padding: 5px;
+    }
     .fields {
         width: 90%;
         min-width: 280px;
         padding: 8px;
     }
     .signupFields {
-        height: 80vh;
+        height: 100%;
     }
     .loginFields {
-        height: 70vh;
+        height: 100%;
     }
 
     .fields h6 {

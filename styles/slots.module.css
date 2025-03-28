@@ -47,7 +47,7 @@
 
 
 .slot, .slotDisabled {
-    padding: 4px;
+    padding: 6px;
     border-radius: 0.25rem;
     font-weight: 600;
     font-size: 12px;
@@ -75,12 +75,14 @@
     background: #1C4A2A;
     color: #fff;
     border: 1px solid #1C4A2A;
-    padding: 0.5rem;
+    padding: 6px;
     border-radius: 0.25rem;
     font-weight: 600;
-    font-size: small;
+    font-size: 12px;
     text-align: center;
+    align-items: center;
     cursor: pointer;
+    min-width: 80px;
 }
 
 .scrollButton {

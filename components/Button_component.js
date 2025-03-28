@@ -2,7 +2,7 @@
 import React from "react";
 import styles from "../styles/button.module.css";
 
-const Button_component = ({ text, color, actionType , onClick}) => {
+const Button_component = ({ text, color, onClick}) => {
 
   return (
     <div

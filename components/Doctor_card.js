@@ -1,14 +1,18 @@
 // doctor card component
-
+'use client'
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import styles from "../styles/card.module.css";
 
 export default function Doctor_card({ doctor }) {
+    const router = useRouter();
+
     return (
         <div className={styles.card}>
-            <Link href={`/profile/${doctor.doctor_id}`}>
-                <div className={styles.profile}>
+            <div 
+                className={styles.profile} 
+                onClick={() => router.push(`/appointments/${doctor.doctor_id}`)}
+                >
                     <img src={doctor.picture} alt={doctor.name} width={120} height={120} className={styles.profilePic} />
                     <h3 className={styles.name}>{doctor.doctor_name}, {doctor.title}</h3>
                     <div className={styles.description}>
@@ -47,13 +51,12 @@ export default function Doctor_card({ doctor }) {
                         ))}
                     </div>
                 </div>
-                         
-                   
-                    
-            </Link>
-            <Link href="/booking">
-                <button className={styles.bookBtn}>Book Appointment</button>
-            </Link>
+                <button 
+                    className={styles.bookBtn}
+                    onClick={() => router.push(`/appointments/${doctor.doctor_id}/booking`)}
+                >
+                    Book Appointment
+                </button>
         </div>
     );
 }

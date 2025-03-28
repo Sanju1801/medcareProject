@@ -1,16 +1,53 @@
-import React from "react";
+'use client'
+import React, { useState } from "react";
 import InputComponent from "./Input_component";
 import Button_component from "./Button_component";
 import styles from '../styles/login_signup.module.css';
 import Link from "next/link";
 
+const URL = "http://localhost:3001/signup";
+
 const SignupComponent = () => {
-  const handleGoogleSignup = () => {
-    window.location.href = "http://localhost:3001/google"; 
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSignup = async (e) => {
+    e.stopPropagation();
+
+    if (!name || !email || !password) {
+      setError("All fields are required.");
+      return;
+    }
+
+    try {
+      const response = await fetch(URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Signup failed");
+      }
+
+      alert("Signup successful! Please login.");
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
+  const handleGoogleSignup = () => {
+    window.location.href = "http://localhost:3001/google";
+  };
+
+  const isResetDisabled = !name && !email && !password;
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={() => setError("")}>
 
       <div className={`${styles.fields} ${styles.signupFields}`}>
 
@@ -22,33 +59,47 @@ const SignupComponent = () => {
           </span>
         </div>
 
+        {error && <p className={styles.error}>{error}</p>}
+
         <section className={styles.section}>
           <InputComponent
             LabelName="Name"
             color="rgba(28, 74, 42, 1)"
-            input_type="text"
+            value={name} 
+            change={setName}
             img_url="./name.svg"
             placeholder_name="Enter Your Name"
           />
           <InputComponent
             LabelName="Email"
             color="rgba(28, 74, 42, 1)"
-            input_type="email"
+            value={email} 
+            change={setEmail}
             img_url="./At sign.svg"
             placeholder_name="example@123.com"
           />
           <InputComponent
             LabelName="Password"
             color="rgba(28, 74, 42, 1)"
-            input_type="password"
+            value={password} 
+            change={setPassword}
             img_url="./Lock.svg"
             placeholder_name="Enter Your Password"
             isPasswordFlag={true}
           />
-          <Button_component text="Sign Up" color="#1C4A2A" />
-          <Button_component text="Google Signup" color="rgb(97, 180, 228)" actionType="googleSignup"/>
-          <Button_component text="Reset" color="#C6B09A" />
+          <Button_component text="Sign Up" color="#1C4A2A" onClick={handleSignup} />
+          <Button_component text="Google Signup" color="rgb(97, 180, 228)" onClick={handleGoogleSignup} />
+          <Button_component text="Reset" color="#C6B09A" 
+            disabled={isResetDisabled}
+            onClick={() => { 
+              setName(""); 
+              setEmail(""); 
+              setPassword(""); 
+              setError(""); 
+            }} 
+          />
         </section>
+
       </div>
     </div>
   );

@@ -1,8 +1,6 @@
- //******************* */
 'use client'
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
- //********************************** */
 import styles from "../styles/login_signup.module.css";
 import Input_component from "./Input_component";
 import Button_component from "./Button_component";
@@ -11,14 +9,13 @@ import Link from "next/link";
 const URL = "http://localhost:3001/login";
 
 const LoginComponent = () => {
-  //********************* */
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
 
   const handleLogin = async (e) => {
-    console.log('error herre');
+    e.stopPropagation();
     if (!email || !password) {
       setError("Both email and password are required.");
       return;
@@ -30,25 +27,27 @@ const LoginComponent = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
+
       if(response.ok){
         router.push('/appointments');
-        console.log('pushed successfully');
       }
       const data = await response.json();
-      
+
       if (!response.ok) {
         throw new Error(data.message || "Login failed");
       }
 
+      router.push("/appointments");
+
     } catch (err) {
-      console.log('error herre3');
       setError(err.message);
     }
   };
 
-  //**************************** */
+  const isResetDisabled = !email && !password;
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={() => setError("")}>
       <div className={`${styles.fields} ${styles.loginFields}`}>
         <h6>Login</h6>
         <div className={styles.subtilte}>
@@ -59,6 +58,8 @@ const LoginComponent = () => {
               <Link href="/signup">Sign up here.</Link>
           </span> 
         </div>
+        
+        {error && <p className={styles.error}>{error}</p>} 
         
         <section className={styles.section}>
           <Input_component
@@ -80,8 +81,17 @@ const LoginComponent = () => {
             placeholder_name="Enter Your Password"
             isPasswordFlag = {true} 
           />
-          <Button_component text="Login" color="#1C4A2A" onClick={()=> handleLogin()}/>
-          <Button_component text="Reset" color="#C6B09A" onClick={() => { setEmail(""); setPassword(""); }}/>
+          <Button_component text="Login" color="#1C4A2A" onClick={handleLogin}/>
+          <Button_component
+            text="Reset"
+            color="#C6B09A"
+            disabled={isResetDisabled}
+            onClick={() => {
+              setEmail("");
+              setPassword("");
+              setError(""); 
+            }}
+          />
           <a href="#"><p className={styles.forgot}>Forgot Password ?</p></a>
         </section>
       </div>
