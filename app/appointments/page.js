@@ -7,8 +7,10 @@ import Search from "@/components/Search";
 import Filter from "@/components/Filter";
 import Doctor_card from "@/components/Doctor_card";
 import Pagination from "@/components/Pagination";
+import CheckAuth from "@/components/CheckAuth";
 
-const ITEMS_PER_PAGE = 6;
+// const ITEMS_PER_PAGE = 6;
+const itemsPerPage = 6;
 
 export default function Appointment() {
     const [doctors, setDoctors] = useState([]);
@@ -17,51 +19,58 @@ export default function Appointment() {
     const [filters, setFilters] = useState({ rating: "all", experience: "all", gender: "all", searchQuery: "", page: 1 });
     const [totalPages, setTotalPages] = useState(1);
     const [totalDoctors, setTotalDoctors] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(6); 
 
+    // useEffect(() => {
+    //     const updateItemsPerPage = () => {
+    //         setItemsPerPage(window.innerWidth < 768 ? 2 : 6); 
+    //     };
 
-    // Fetch doctors from the backend
+    //     updateItemsPerPage();
+    //     window.addEventListener("resize", updateItemsPerPage);
+
+    //     return () => window.removeEventListener("resize", updateItemsPerPage);
+    // }, []);
+
+    // useEffect(() => {
+    //     setCurrentPage(1);
+    // }, [filters]);
+
     useEffect(() => {
         const fetchDoctors = async () => {
             setLoading(true);
             try {
                 const queryParams = new URLSearchParams();
-        
-                if(filters.searchQuery){
-                    queryParams.append("searchQuery", filters.searchQuery);
-                    // setCurrentPage(1);
-                }
-                if(filters.rating === "Show all"){
-                    filters.rating = 'all';
-                    // setCurrentPage(1);
-                }
-                if(filters.experience === "Show all"){
-                    filters.experience = 'all';
-                    // setCurrentPage(1);
-                }
-                if(filters.experience === "15+"){
-                    filters.experience = '16';
-                    // setCurrentPage(1);
-                }
-                if(filters.gender === "Show all"){
-                    filters.gender = 'all';
-                    // setCurrentPage(1);
-                }
-                filters.page = currentPage;
+
+                if (filters.searchQuery) queryParams.append("searchQuery", filters.searchQuery);
+                if (filters.rating === "Show all") filters.rating = 'all';
+                if (filters.experience === "Show all") filters.experience = 'all';
+                if (filters.experience === "15+") filters.experience = '16';
+                if (filters.gender === "Show all") filters.gender = 'all';
+
                 queryParams.append("rating", filters.rating);
                 queryParams.append("experience", filters.experience);
                 queryParams.append("gender", filters.gender);
-                queryParams.append("page", filters.page);
+                queryParams.append("page", currentPage);
+                queryParams.append("itemsPerPage", itemsPerPage); 
 
-                const response = await fetch(`http://localhost:3001/doctors/filter?${queryParams.toString()}`);
+                const token = localStorage.getItem("token");
+                console.log("Token from localStorage:", token);
+
+                const response = await fetch(`http://localhost:3001/doctors/filter?${queryParams.toString()}`, {
+                    method: "GET", 
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`
+                    }
+                });
+
                 const data = await response.json();
-                console.log("fetch api response : ",data);
-
                 if (Array.isArray(data.doctors)) {
                     setDoctors(data.doctors);
                 }
 
-                setTotalPages(Math.ceil(data.total / ITEMS_PER_PAGE)); 
-                // setTotalPages(data.length);
+                setTotalPages(Math.ceil(data.total / itemsPerPage));
                 setTotalDoctors(data.total);
             } 
             catch (error) {
@@ -72,9 +81,11 @@ export default function Appointment() {
         };
 
         fetchDoctors();
-    }, [filters, currentPage]);
+    }, [filters, currentPage])
 
     return (
+        <>
+        <CheckAuth />
         <div className={styles.mainContainer}>
             <Search setFilters={setFilters} />
             <div className={styles.title}>
@@ -96,5 +107,6 @@ export default function Appointment() {
             <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
             <Footer />
         </div>
+        </>
     );
 }

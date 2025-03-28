@@ -1,5 +1,6 @@
 'use client'
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import InputComponent from "./Input_component";
 import Button_component from "./Button_component";
 import styles from '../styles/login_signup.module.css';
@@ -12,6 +13,7 @@ const SignupComponent = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const router = useRouter();
 
   const handleSignup = async (e) => {
     e.stopPropagation();
@@ -28,13 +30,18 @@ const SignupComponent = () => {
         body: JSON.stringify({ name, email, password }),
       });
 
-      const data = await response.json();
+      if(response.ok){
+        const data = await response.json();
+        localStorage.setItem("token", data.token);
+        console.log("Token:", data.token);
 
-      if (!response.ok) {
+        router.replace("/appointments");
+      }
+      else {
         throw new Error(data.message || "Signup failed");
       }
 
-      alert("Signup successful! Please login.");
+
     } catch (err) {
       setError(err.message);
     }
@@ -43,6 +50,13 @@ const SignupComponent = () => {
   const handleGoogleSignup = () => {
     window.location.href = "http://localhost:3001/google";
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      router.replace("/appointments"); 
+    }
+  }, []);
 
   const isResetDisabled = !name && !email && !password;
 
