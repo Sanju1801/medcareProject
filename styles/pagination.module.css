@@ -4,3 +4,10 @@
     justify-content: center;
     gap: 10px;
 }
+
+.pagInfo {
+    border: 1px solid #1C4A2A;
+    background: #F8FCF9;
+    padding: 20px;
+
+}

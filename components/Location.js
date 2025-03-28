@@ -3,7 +3,7 @@ import React from "react";
 import { useState } from "react";
 import styles from "../styles/Location.module.css";
 
-export default function Location() {
+export default function Location({ location}) {
     const [toggle, setToggle] = useState(true);
     const handleToggle = () => setToggle(!toggle);
 
@@ -40,10 +40,31 @@ export default function Location() {
                     className={toggle ? styles.disabledDropdown : ""}
                 >
                     <option id={styles.liveLocation}>
-                        MedicareHeart Institute, Okhla Road
+                        {location}
                     </option>
                 </select>
             </div>
         </div>
     )
 }
+
+/*
+"use client";
+import React from "react";
+import styles from "../styles/Location.module.css";
+
+export default function Location({ location }) {
+    return (
+        <div className={styles.container}>
+            <div className={styles.top}>
+                <p>Schedule Appointment</p>
+                <button className={styles.bookBtn}>Book Appointment</button>
+            </div>
+            <div className={styles.middle}>
+                <p><strong>Location:</strong> {location}</p>
+            </div>
+        </div>
+    );
+}
+*/
+
