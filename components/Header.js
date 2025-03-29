@@ -1,9 +1,9 @@
-'use client'
-import React, { useState , useEffect } from 'react';
-import Image from 'next/image';
-import { usePathname, useRouter } from 'next/navigation';
-import Link from 'next/link';
-import styles from '../styles/header.module.css';
+"use client";
+import React, { useState, useEffect } from "react";
+import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
+import Link from "next/link";
+import styles from "../styles/header.module.css";
 
 export default function Header() {
     const router = useRouter();
@@ -11,18 +11,32 @@ export default function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    const checkToken = ()=>{
-        const token = localStorage.getItem("token"); 
-        if (token){
-          setIsLoggedIn(true);
-        }  
-      }
+    const checkToken = () => {
+        const token = localStorage.getItem("token");
+        if (!token) {
+            setIsLoggedIn(false);
+            return;
+        }
+
+        try {
+            const payload = JSON.parse(atob(token.split(".")[1])); 
+            if (payload.exp * 1000 < Date.now()) {
+                handleLogout(); 
+            } else {
+                setIsLoggedIn(true);
+            }
+        } catch (error) {
+            console.error("Invalid token:", error);
+            handleLogout(); 
+        }
+    };
+
     const handleLogout = () => {
         localStorage.removeItem("token");
         setIsLoggedIn(false);
         setMenuOpen(false);
         router.push("/login");
-    }
+    };
 
     useEffect(() => {
         checkToken();
@@ -61,6 +75,10 @@ export default function Header() {
                         )}
                     </ul>
                 </div>
+
+                <Link href="/contact" className={styles.ambulanceLink}>
+                    <Image src="/ambulance.svg" alt="Emergency Contacts" width={30} height={30} />
+                </Link>
 
                 {/* Hamburger Icon for small screens */}
                 <div className={styles.menuIcon} onClick={() => setMenuOpen(!menuOpen)}>

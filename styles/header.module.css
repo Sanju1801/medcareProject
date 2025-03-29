@@ -62,6 +62,16 @@
   text-decoration: none;
 }
 
+.ambulanceLink {
+  margin-left: 40px;
+  cursor: pointer;
+}
+
+.ambulanceLink:hover {
+  transform: scale(1.1);
+}
+
+
 .navBtns {
   display: flex;
   gap: 8px;
