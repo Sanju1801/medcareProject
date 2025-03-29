@@ -15,6 +15,7 @@ export default function Profile() {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
+        console.log("token : ", token);
         if (!token) {
             router.push("/login");
             return;
@@ -82,15 +83,6 @@ export default function Profile() {
                             />
                         ))}
                     </div>
-                    
-                    <button 
-                        className={styles.addReviewBtn} 
-                        onClick={handleReview}
-                        >
-                        Add Review
-                    </button>
-
-                    {reviewOpen && <Review />}
 
                 </div>
             </div>
@@ -112,13 +104,24 @@ export default function Profile() {
                     )}
                 </ul>
 
-                <button 
-                    className={styles.bookBtn} 
-                    onClick={() => router.push(`/appointments/${doctor.id}/booking`)}
+                <div className={styles.btnContainer}>
+                    <button
+                        className={styles.bookBtn}
+                        onClick={() => router.push(`/appointments/${doctor.id}/booking`)}
                     >
-                    Book Appointment
-                </button>
+                        Book Appointment
+                    </button>
+
+                    <button
+                        className={styles.addReviewBtn}
+                        onClick={handleReview}
+                    >
+                        Add Review
+                    </button>
+
+                </div>
             </div>
+            {reviewOpen && <Review doctorId={id} onClose={() => setReviewOpen(false)}/>}
         </div>
     );
 }

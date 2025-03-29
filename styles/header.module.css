@@ -130,8 +130,13 @@
 }
 
 .logoutBtn {
-  background: #db1b0d;
+  background-color: #f39a25;
   color: white;
+  font-weight: 600;
+
+}
+.logoutBtn:hover {
+  background-color: #f05c06;
 }
 
 @media (max-width: 768px) {
