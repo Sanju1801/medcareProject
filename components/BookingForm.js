@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation"; 
 import Slots from "./Slots";
 import styles from "../styles/bookingForm.module.css";
 import Calendar from "./Calendar";
@@ -8,7 +7,6 @@ import Location from "./Location";
 import Popup from "./popup";  
 
 export default function BookingForm({ doctor }) {
-    const router = useRouter(); 
     const doctorId = doctor.id;
     const doctorLocation = doctor.address;
 
@@ -62,7 +60,7 @@ export default function BookingForm({ doctor }) {
 
             const result = await res.json();
             if (!res.ok) throw new Error(result.message);
-
+            
             setPopupMessage("Wait for appointment confirmation on Mail !");
             setShowPopup(true);
 

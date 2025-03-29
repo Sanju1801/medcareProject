@@ -2,9 +2,13 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "@/styles/adminAppointments.module.css";
+import Popup from "@/components/popup";
 
 export default function Appointments() {
     const [appointments, setAppointments] = useState([]);
+    const [showPopup, setShowPopup] = useState(false);
+    const [popupMessage, setPopupMessage] = useState(""); 
+                
 
     useEffect(() => {
         fetchAppointments();
@@ -36,9 +40,12 @@ export default function Appointments() {
             setAppointments((prevAppointments) =>
                 prevAppointments.filter((appointment) => appointment.id !== id)
             );
-            alert('Appointment status changed')
+            setPopupMessage("Appointment status updated !");
+            setShowPopup(true);
+
         } catch (error) {
-            console.error("Error updating appointment status:", error);
+            setPopupMessage(error.message || "Failed to book appointment.");
+            setShowPopup(true);
         }
     };
 
@@ -102,6 +109,8 @@ export default function Appointments() {
                     )}
                 </tbody>
             </table>
+            {showPopup && <Popup message={popupMessage} redirecting_path={'/adminAppointments'} />}
+
         </div>
     );
 }

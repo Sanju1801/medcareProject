@@ -2,7 +2,7 @@
     padding: 20px;
     max-width: 1200px;
     margin: auto;
-    background: #F8FCF9; /* Light background */
+    background: #F8FCF9;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
@@ -12,7 +12,7 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    background: #1C4A2A; /* Dark green */
+    background: #1C4A2A; 
     padding: 15px;
     border-radius: 8px;
     color: white;
@@ -30,7 +30,6 @@
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    transition: background 0.3s;
 }
 
 .addButton:hover {
@@ -69,41 +68,18 @@
     height: 50px;
     border-radius: 50%;
 }
-
-.actionButtons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    height: 100%;
-    padding: 10px;
-}
-
 .table td {
     vertical-align: middle;
 }
 
-.updateButton, .deleteButton {
+
+.deleteButton {
     padding: 8px 12px;
     width: 100px;
     text-align: center;
     border-radius: 5px;
     border: none;
     cursor: pointer;
-    transition: background 0.3s;
-}
-
-.updateButton {
-    background-color: #facc15;
-    color: black;
-}
-
-.updateButton:hover {
-    background-color: #eab308;
-}
-
-.deleteButton {
     background-color: #ef4444;
     color: white;
 }

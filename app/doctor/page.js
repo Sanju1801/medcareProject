@@ -2,10 +2,14 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "@/styles/doctor.module.css"; 
+import Link from "next/link";
+import Popup from "@/components/popup";
 
 export default function Doctor() {
     const [doctors, setDoctors] = useState([]);
     const router = useRouter();
+    const [showPopup, setShowPopup] = useState(false);
+    const [popupMessage, setPopupMessage] = useState(""); 
 
     useEffect(() => {
         fetchDoctors();
@@ -18,7 +22,8 @@ export default function Doctor() {
             const res = await response.json();
             setDoctors(res.data);
         } catch (error) {
-            console.error("Error fetching doctors:", error);
+            setPopupMessage(error.message || "Failed to Fetch Doctors.");
+            setShowPopup(true);
         }
     };
 
@@ -32,13 +37,13 @@ export default function Doctor() {
             if (!response.ok) throw new Error("Failed to delete doctor");
 
             setDoctors(doctors.filter((doctor) => doctor.id !== id));
-        } catch (error) {
-            console.error("Error deleting doctor:", error);
-        }
-    };
+            setPopupMessage("Doctor deleted successfully !");
+            setShowPopup(true);
 
-    const handleUpdate = (id) => {
-        router.push(`/updateDoctor/${id}`); 
+        } catch (error) {
+            setPopupMessage(error.message || "Failed to delete doctor.");
+            setShowPopup(true);
+        }
     };
 
     return (
@@ -67,7 +72,11 @@ export default function Doctor() {
                 <tbody>
                     {doctors.map((doctor) => (
                         <tr key={doctor.id}>
-                            <td>{doctor.id}</td>
+             <td>
+                                    <Link href={`/appointments/${doctor.id}`} className={styles.doctorLink}>
+                                        {doctor.id}
+                                    </Link>
+                                </td>
                             <td><img src={doctor.picture_url || '/doctor.png'} alt={doctor.name} className={styles.doctorImage} /></td>
                             <td>{doctor.name}</td>
                             <td>{doctor.title}</td>
@@ -75,10 +84,7 @@ export default function Doctor() {
                             <td>{doctor.address}</td>
                             <td>{doctor.nor}</td>
                             <td>{doctor.rating} ⭐</td>
-                            <td className={styles.actionButtons}>
-                                <button className={styles.updateButton} onClick={() => handleUpdate(doctor.id)}>
-                                    Update
-                                </button>
+                            <td>
                                 <button className={styles.deleteButton} onClick={() => handleDelete(doctor.id)}>
                                     Delete
                                 </button>
@@ -87,6 +93,8 @@ export default function Doctor() {
                     ))}
                 </tbody>
             </table>
+            {showPopup && <Popup message={popupMessage} redirecting_path={'/doctor'} />}
+
         </div>
     );
 }

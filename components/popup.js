@@ -13,7 +13,7 @@ function Popup ({ redirecting_path,  message }) {
     const timer = setTimeout(() => {
       setShowPopup(false); 
       router.push(redirecting_path); 
-    }, 2000);
+    }, 2500);
 
     return () => clearTimeout(timer);
   }, [redirecting_path, router]);
