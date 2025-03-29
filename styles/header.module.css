@@ -70,11 +70,10 @@
 .btn {
   border-radius: 8px;
   margin: 0 6px;
-  padding: 4px 20px;
+  padding: 6px 24px;
   font-weight: 200;
   cursor: pointer;
   transition: 0.3s;
-
   border: 1px solid #E0E8E0;
   background: none;
   color: black;
@@ -120,6 +119,11 @@
   cursor: pointer;
 }
 
+.logoutBtn {
+  background: #db1b0d;
+  color: white;
+}
+
 @media (max-width: 768px) {
   .header {
       padding: 16px;
@@ -157,4 +161,9 @@
   .navBtns {
       display: none;
   }
+
+  .logoutBtn {
+    border-radius: 8px;
+    padding: 5px 20px;
+}
 }

@@ -4,6 +4,7 @@ import { useParams } from "next/navigation";
 import Footer from "@/components/Footer";
 import BookingForm from "@/components/BookingForm";
 import styles from "@/styles/bookingHome.module.css";
+import CheckAuth from "@/components/CheckAuth";
 
 export default function Booking() {
   const { id } = useParams(); 
@@ -22,7 +23,14 @@ export default function Booking() {
 
   const fetchDoctorData = async (id) => {
     try {
-      const res = await fetch(`http://localhost:3001/doctors/profile/${id}`);
+      const token = localStorage.getItem("token");
+            const res = await fetch(`http://localhost:3001/doctors/profile/${id}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
       if (!res.ok) throw new Error("Failed to fetch doctor data");
       const result = await res.json();
 
@@ -40,6 +48,7 @@ export default function Booking() {
 
   return (
     <div>
+      <CheckAuth />
       <div className={styles.mainContainer}>
         {/* Left Section */}
         <div className={styles.leftContainer}>

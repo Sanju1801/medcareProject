@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "../styles/login_signup.module.css";
 import Input_component from "./Input_component";
@@ -21,28 +21,41 @@ const LoginComponent = () => {
       return;
     }
 
+    // ***********************************************************
+    // if user = admin, redirect to adminDashboard
+
+
     try {
       const response = await fetch(URL, { 
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json"},
         body: JSON.stringify({ email, password }),
       });
 
       if(response.ok){
-        router.push('/appointments');
-      }
-      const data = await response.json();
+        const data = await response.json();
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("userId", data.user.id);
+        console.log("Token:", data.token);
+        console.log("User ID:", data.user.id);
 
-      if (!response.ok) {
+        router.replace("/appointments");
+      }
+      else {
         throw new Error(data.message || "Login failed");
       }
-
-      router.push("/appointments");
 
     } catch (err) {
       setError(err.message);
     }
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      router.replace("/appointments");
+    }
+  }, []);
 
   const isResetDisabled = !email && !password;
 

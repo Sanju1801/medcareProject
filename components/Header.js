@@ -1,13 +1,32 @@
 'use client'
-import { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import styles from '../styles/header.module.css';
 
 export default function Header() {
+    const router = useRouter();
     const pathname = usePathname();
     const [menuOpen, setMenuOpen] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const checkToken = ()=>{
+        const token = localStorage.getItem("token"); 
+        if (token){
+          setIsLoggedIn(true);
+        }  
+      }
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        setIsLoggedIn(false);
+        setMenuOpen(false);
+        router.push("/login");
+    }
+
+    useEffect(() => {
+        checkToken();
+      }, [pathname, menuOpen]);
 
     return (
         <header className={styles.header}>
@@ -19,7 +38,7 @@ export default function Header() {
                         <h1>MedCare</h1>
                     </div>
 
-                    {/* Navigation Links */}
+                    {/* Nav bar links */}
                     <ul className={`${styles.navLinks} ${menuOpen ? styles.active : ''}`}>
                         <li className={pathname === '/' ? styles.active : ''}>
                             <Link href="/">Home</Link>
@@ -33,33 +52,50 @@ export default function Header() {
                         <li className={pathname === '/reviews' ? styles.active : ''}>
                             <Link href="/">Reviews</Link>
                         </li>
+                        {menuOpen && isLoggedIn && (
+                            <li className={styles.mobileLogout}>
+                                <button onClick={handleLogout} className={styles.logoutBtn}>
+                                    Logout
+                                </button>
+                            </li>
+                        )}
                     </ul>
                 </div>
 
-                {/* Hamburger Icon for Mobile */}
+                {/* Hamburger Icon for small screens */}
                 <div className={styles.menuIcon} onClick={() => setMenuOpen(!menuOpen)}>
                     ☰
                 </div>
 
-                {/* Buttons */}
                 <div className={styles.navBtns}>
-                    <Link href="/login">
-                        <button className={`
-                        ${styles.btn} 
-                        ${styles.loginBtn} 
-                        ${pathname === '/login' ? styles.activeBtn : styles.inactiveBtn}
-                        `}>Login</button>
-                    </Link>
-                    <Link href="/signup">
-                        <button className={`
-                        ${styles.btn} 
-                        ${styles.registerBtn} 
-                        ${pathname === '/signup' ? styles.activeBtn : styles.inactiveBtn}
-                        `}>Register</button>
-                    </Link>
-                    {/* <Link href="/signup">
-                        <button className={`${styles.btn} ${styles.registerBtn}`}>Register</button>
-                    </Link> */}
+                    {isLoggedIn ? (
+                        <button onClick={handleLogout} className={`${styles.btn} ${styles.logoutBtn}`}>
+                            Logout
+                        </button>
+                    ) : (
+                        <>
+                            <Link href="/login">
+                                <button className={`
+                                    ${styles.btn} 
+                                    ${styles.loginBtn} 
+                                    ${pathname === "/login" ? styles.activeBtn : styles.inactiveBtn}
+                                    `}
+                                >
+                                    Login
+                                </button>
+                            </Link>
+                            <Link href="/signup">
+                                <button className={`
+                                    ${styles.btn} 
+                                    ${styles.registerBtn} 
+                                    ${pathname === "/signup" ? styles.activeBtn : styles.inactiveBtn}
+                                    `}
+                                >
+                                    Register
+                                </button>
+                            </Link>
+                        </>
+                    )}
                 </div>
             </nav>
         </header>
