@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import Footer from "@/components/Footer";
 import BookingForm from "@/components/BookingForm";
 import styles from "@/styles/bookingHome.module.css";
@@ -8,6 +8,7 @@ import CheckAuth from "@/components/CheckAuth";
 
 export default function Booking() {
   const { id } = useParams(); 
+  const router = useRouter();
   const doctorId = parseInt(id, 10);
 
   console.log("Doctor ID:", doctorId);
@@ -24,27 +25,37 @@ export default function Booking() {
   const fetchDoctorData = async (id) => {
     try {
       const token = localStorage.getItem("token");
-            const res = await fetch(`http://localhost:3001/doctors/profile/${id}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                }
-            });
-      if (!res.ok) throw new Error("Failed to fetch doctor data");
-      const result = await res.json();
 
+      const res = await fetch(`http://localhost:3001/doctors/profile/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+        }
+      });
+
+      if (res.status === 404) {
+        console.error("Doctor not found, redirecting...");
+        router.push("/login");
+        return;
+      }
+
+      if (!res.ok) throw new Error("Failed to fetch doctor data");
+
+      const result = await res.json();
       console.log("Fetched data:", result.data);
       setDoctor(result.data);
-    } catch (error) {
+    } 
+    catch (error) {
       console.error("Error fetching doctor details:", error);
+      router.push("/login"); 
     } finally {
       setLoading(false);
     }
   };
 
-  if (loading) return <p className={styles.loading}>Loading...</p>;
-  if (!doctor) return <p className={styles.error}>Doctor not found.</p>;
+  if (loading) return <p>Loading...</p>;
+  if (!doctor) return <p >User not logged in. Redirecting...</p>;
 
   return (
     <div>

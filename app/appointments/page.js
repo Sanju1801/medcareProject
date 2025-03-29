@@ -9,7 +9,6 @@ import Doctor_card from "@/components/Doctor_card";
 import Pagination from "@/components/Pagination";
 import CheckAuth from "@/components/CheckAuth";
 
-// const ITEMS_PER_PAGE = 6;
 const itemsPerPage = 6;
 
 export default function Appointment() {
@@ -20,21 +19,6 @@ export default function Appointment() {
     const [totalPages, setTotalPages] = useState(1);
     const [totalDoctors, setTotalDoctors] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(6); 
-
-    // useEffect(() => {
-    //     const updateItemsPerPage = () => {
-    //         setItemsPerPage(window.innerWidth < 768 ? 2 : 6); 
-    //     };
-
-    //     updateItemsPerPage();
-    //     window.addEventListener("resize", updateItemsPerPage);
-
-    //     return () => window.removeEventListener("resize", updateItemsPerPage);
-    // }, []);
-
-    // useEffect(() => {
-    //     setCurrentPage(1);
-    // }, [filters]);
 
     useEffect(() => {
         const fetchDoctors = async () => {
@@ -93,7 +77,9 @@ export default function Appointment() {
                 <p>Book appointment with minimum wait-time & verified doctor details</p>
             </div>
             <div className={styles.subContainer}>
-                <div className={styles.filterContainer}><Filter setFilters={setFilters} /></div>
+                <div className={styles.filterContainer}>
+                    <Filter setFilters={setFilters} />
+                </div>
                 <div className={styles.doctorsContainer}>
                     {loading ? (
                         <p>Loading doctors...</p>

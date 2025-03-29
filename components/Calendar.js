@@ -7,7 +7,7 @@ export default function Calendar({ onDateSelect }) {
     const [selectedDate, setSelectedDate] = useState(today.toISOString().split("T")[0]);
     const dateContainerRef = useRef(null);
 
-    const dates = Array.from({ length: 7 }, (_, i) => {
+    const dates = Array.from({ length: 30 }, (_, i) => {
         const date = new Date();
         date.setDate(today.getDate() + i);
         return {
@@ -39,7 +39,7 @@ export default function Calendar({ onDateSelect }) {
             <div className={styles.month}>
                 {/* <button className={styles.navButton} onClick={scrollLeft}>‹</button> */}
                 <span className={styles.monthTitle}>
-                    {today.toLocaleDateString("en-US", { month: "long", year: "numeric" })}
+                {new Date(selectedDate).toLocaleDateString("en-US", { month: "long", year: "numeric" })}
                 </span>
                 {/* <button className={styles.navButton} onClick={scrollRight}>›</button> */}
             </div>

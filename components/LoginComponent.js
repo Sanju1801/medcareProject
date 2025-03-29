@@ -20,42 +20,47 @@ const LoginComponent = () => {
       setError("Both email and password are required.");
       return;
     }
-
-    // ***********************************************************
-    // if user = admin, redirect to adminDashboard
-
-
+  
     try {
       const response = await fetch(URL, { 
         method: "POST",
         headers: { "Content-Type": "application/json"},
         body: JSON.stringify({ email, password }),
       });
-
+  
       if(response.ok){
         const data = await response.json();
+        console.log("data===========", data);
+
         localStorage.setItem("token", data.token);
         localStorage.setItem("userId", data.user.id);
+        localStorage.setItem("role", data.user.role);
+  
         console.log("Token:", data.token);
         console.log("User ID:", data.user.id);
-
-        router.replace("/appointments");
+        console.log("User Role:", data.user.role);
+  
+        if (data.user.role === "admin") {
+          router.replace("/adminDashboard");
+        } else {
+          router.replace("/appointments");
+        }
       }
       else {
         throw new Error(data.message || "Login failed");
       }
-
+  
     } catch (err) {
       setError(err.message);
     }
   };
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      router.replace("/appointments");
-    }
-  }, []);
+  
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   if (token) {
+  //     router.replace("/appointments");
+  //   }
+  // }, []);
 
   const isResetDisabled = !email && !password;
 

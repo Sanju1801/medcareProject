@@ -12,18 +12,38 @@ export default function Doctor() {
     const [popupMessage, setPopupMessage] = useState(""); 
 
     useEffect(() => {
-        fetchDoctors();
+        checkAdminAuth(); 
     }, []);
 
-    const fetchDoctors = async () => {
+    const checkAdminAuth = () => {
+        const token = localStorage.getItem("token");
+        const role = localStorage.getItem("role");
+
+        if (!token || role !== "admin") {
+            setPopupMessage("Unauthorized access. Redirecting to login...");
+            setShowPopup(true);
+            setTimeout(() => router.push("/login"), 2000);
+            return;
+        }
+
+        fetchDoctors(token); 
+    };
+
+    const fetchDoctors = async (token) => {
         try {
-            const response = await fetch("http://localhost:3001/admin/doctors");
+            const response = await fetch("http://localhost:3001/admin/doctors", {
+                headers: { "Authorization": `Bearer ${token}` }
+            });
+
+            if (response.status === 401) throw new Error("Unauthorized access.");
             if (!response.ok) throw new Error("Failed to fetch doctors");
+
             const res = await response.json();
             setDoctors(res.data);
         } catch (error) {
             setPopupMessage(error.message || "Failed to Fetch Doctors.");
             setShowPopup(true);
+            setTimeout(() => router.push("/login"), 2000);
         }
     };
 

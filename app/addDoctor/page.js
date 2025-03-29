@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import InputComponent from "@/components/Input_component";
 import styles from "@/styles/addDoctor.module.css";
@@ -19,6 +19,13 @@ export default function DoctorForm() {
     const [popupMessage, setPopupMessage] = useState("");
 
     const router = useRouter();
+
+    useEffect(() => {
+        const role = localStorage.getItem("role"); 
+        if (role !== "admin") {
+            router.replace("/login");
+        }
+    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();

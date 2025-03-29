@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import styles from "@/styles/adminAppointments.module.css";
 import Popup from "@/components/popup";
@@ -8,16 +9,23 @@ export default function Appointments() {
     const [appointments, setAppointments] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
     const [popupMessage, setPopupMessage] = useState(""); 
-                
+    const router = useRouter();
 
     useEffect(() => {
+        const role = localStorage.getItem("role"); 
+        if (role !== "admin") {
+            router.replace("/login");
+            return;
+        }
         fetchAppointments();
     }, []);
 
     const fetchAppointments = async () => {
         try {
             const response = await fetch("http://localhost:3001/admin/appointments");
+            
             if (!response.ok) throw new Error("Failed to fetch appointments");
+            
             const res = await response.json();
             setAppointments(res.data);
         } catch (error) {
@@ -110,7 +118,6 @@ export default function Appointments() {
                 </tbody>
             </table>
             {showPopup && <Popup message={popupMessage} redirecting_path={'/adminAppointments'} />}
-
         </div>
     );
 }
