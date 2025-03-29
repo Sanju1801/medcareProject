@@ -1,0 +1,107 @@
+"use client";
+import React, { useEffect, useState } from "react";
+import Link from "next/link";
+import styles from "@/styles/adminAppointments.module.css";
+
+export default function Appointments() {
+    const [appointments, setAppointments] = useState([]);
+
+    useEffect(() => {
+        fetchAppointments();
+    }, []);
+
+    const fetchAppointments = async () => {
+        try {
+            const response = await fetch("http://localhost:3001/admin/appointments");
+            if (!response.ok) throw new Error("Failed to fetch appointments");
+            const res = await response.json();
+            setAppointments(res.data);
+        } catch (error) {
+            console.error("Error fetching appointments:", error);
+        }
+    };
+
+    const updateAppointmentStatus = async (id, status) => {
+        try {
+            const response = await fetch("http://localhost:3001/admin/appointments/update", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ id, status }),
+            });
+
+            if (!response.ok) throw new Error("Failed to update appointment status");
+
+            setAppointments((prevAppointments) =>
+                prevAppointments.filter((appointment) => appointment.id !== id)
+            );
+            alert('Appointment status changed')
+        } catch (error) {
+            console.error("Error updating appointment status:", error);
+        }
+    };
+
+    const formatTime = (isoString) => {
+        const date = new Date(isoString);
+        return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true });
+    };
+
+    return (
+        <div className={styles.container}>
+            <div className={styles.header}>
+                <h1 className={styles.title}>Appointments Management</h1>
+            </div>
+
+            <table className={styles.table}>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Doctor ID</th>
+                        <th>User ID</th>
+                        <th>Location</th>
+                        <th>Slot Time</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {appointments.length === 0 ? (
+                        <tr>
+                            <td colSpan="6" className={styles.noAppointments}>
+                                No pending appointments
+                            </td>
+                        </tr>
+                    ) : (
+                        appointments.map((appointment) => (
+                            <tr key={appointment.id}>
+                                <td>{appointment.id}</td>
+                                <td>
+                                    <Link href={`/appointments/${appointment.doctor_id}`} className={styles.doctorLink}>
+                                        {appointment.doctor_id}
+                                    </Link>
+                                </td>
+                                <td>{appointment.user_id}</td>
+                                <td>{appointment.location_type}</td>
+                                <td>{formatTime(appointment.slot)}</td>
+                                <td className={styles.actionButtons}>
+                                    <button
+                                        className={styles.approveButton}
+                                        onClick={() => updateAppointmentStatus(appointment.id, "approved")}
+                                    >
+                                        Approve
+                                    </button>
+                                    <button
+                                        className={styles.declineButton}
+                                        onClick={() => updateAppointmentStatus(appointment.id, "declined")}
+                                    >
+                                        Decline
+                                    </button>
+                                </td>
+                            </tr>
+                        ))
+                    )}
+                </tbody>
+            </table>
+        </div>
+    );
+}

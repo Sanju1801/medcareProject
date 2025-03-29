@@ -1,5 +1,5 @@
-
-/*'use client';
+/*
+'use client';
 import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import styles from '../styles/slots.module.css';
@@ -53,9 +53,9 @@ export default function Slots({ img_url, shift, slots_array = [], booked_slots =
         </div>
     );
 }
+
+
 */
-
-
 "use client";
 import React, { useState, useRef } from "react";
 import Image from "next/image";
@@ -100,3 +100,4 @@ export default function Slots({ img_url, shift, slots_array = [], booked_slots =
         </div>
     );
 }
+

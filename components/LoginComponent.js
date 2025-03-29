@@ -21,6 +21,10 @@ const LoginComponent = () => {
       return;
     }
 
+    // ***********************************************************
+    // if user = admin, redirect to adminDashboard
+
+
     try {
       const response = await fetch(URL, { 
         method: "POST",
