@@ -25,7 +25,6 @@
     font-size: 20px;
     color: white;
     cursor: pointer;
-    /* transition: background 0.3s ease-in-out; */
 }
 
 .doctorButton {
@@ -42,4 +41,25 @@
 
 .appointmentButton:hover {
     background-color: #059669;
+}
+
+
+@media (max-width: 400px) {
+    .buttonContainer {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .button {
+        width: 80%;
+        font-size: 18px;
+        padding: 15px 0;
+    }
+
+    .header {
+        font-size: 20px;
+    }
 }

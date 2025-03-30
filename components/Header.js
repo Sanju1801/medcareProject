@@ -60,8 +60,8 @@ export default function Header() {
                         <li className={pathname === '/appointments' ? styles.active : ''}>
                             <Link href="/appointments">Appointments</Link>
                         </li>
-                        <li className={pathname === '/blog' ? styles.active : ''}>
-                            <Link href="/">Health Blog</Link>
+                        <li className={pathname === '/contact' ? styles.active : ''}>
+                            <Link href="/contact">Contact</Link>
                         </li>
                         <li className={pathname === '/reviews' ? styles.active : ''}>
                             <Link href="/">Reviews</Link>
@@ -75,10 +75,6 @@ export default function Header() {
                         )}
                     </ul>
                 </div>
-
-                <Link href="/contact" className={styles.ambulanceLink}>
-                    <Image src="/ambulance.svg" alt="Emergency Contacts" width={30} height={30} />
-                </Link>
 
                 {/* Hamburger Icon for small screens */}
                 <div className={styles.menuIcon} onClick={() => setMenuOpen(!menuOpen)}>

@@ -56,9 +56,11 @@
     .searchTitle {
         font-size: 1.3rem;
     }
+
     .searchBox {
         font-size: 1.3rem;
     }
+
     .searchField {
         width: 100%;
         padding: 12px;
@@ -68,8 +70,16 @@
 
 @media (max-width: 400px) {
     .searchBox {
-        width: 100%;
+        width: 95%;
+        height: 40px;
     }
+
+    .searchBtn {
+        height: 40px;
+        padding: 6px 16px;
+        font-size: 16px;
+    }
+
     .searchIcon {
         padding-left: 8px;
     }

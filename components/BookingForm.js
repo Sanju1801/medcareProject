@@ -77,8 +77,9 @@ export default function BookingForm({ doctor }) {
         const res = await result.json();
         if (res.success) {
           const bookedSlots = res.data
-            .filter((item) => item.slot.split("T")[0] === selectedDate) // Extract date from ISO string
-            .map((item) => new Date(item.slot).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", hour12: true }).toUpperCase());
+            .filter((item) => item.slot.split("T")[0] === selectedDate)   // Extract date from ISO string
+            .map((item) => new Date(item.slot).toLocaleTimeString([], 
+              { hour: "2-digit", minute: "2-digit", hour12: true }).toUpperCase());
 
           setBookedSlots(bookedSlots);
           console.log('booked slots : ', bookedSlots);
@@ -173,126 +174,3 @@ export default function BookingForm({ doctor }) {
     </div>
   );
 }
-
-
-/*
-"use client";
-import React, { useState } from "react";
-import Slots from "./Slots";
-import styles from "../styles/bookingForm.module.css";
-import Calendar from "./Calendar";
-import Location from "./Location";
-import Popup from "./popup";  
-
-export default function BookingForm({ doctor }) {
-    const doctorId = doctor.id;
-    const doctorLocation = doctor.address;
-
-    const getCurrentDate = () => {
-        const today = new Date();
-        return today.toISOString().split("T")[0]; // Format: YYYY-MM-DD
-    };
-
-    const [locationType, setLocationType] = useState("online");
-    const [selectedDate, setSelectedDate] = useState(getCurrentDate());
-    const [selectedSlot, setSelectedSlot] = useState(null);
-    // const [selectedShift, setSelectedShift] = useState(null); 
-    const [showPopup, setShowPopup] = useState(false);
-    const [popupMessage, setPopupMessage] = useState(""); 
-
-    const handleLocationTypeChange = (type) => {
-      console.log("Location Type Changed:", type);
-      setLocationType(type);
-  };
-
-    // const handleSlotSelect = (slot, shift) => {
-    //     setSelectedSlot(slot);
-    //     setSelectedShift(shift);
-    // };
-    const handleSlotSelect = (slot) => {
-        setSelectedSlot(slot);
-    };
-
-    const handleNext = async () => {
-        if (!selectedSlot) {
-            alert("Please select a time slot.");
-            return;
-        }
-
-        
-
-        const userId = localStorage.getItem('userId');
-
-        const appointmentData = {
-            doctor_id: doctorId,
-            user_id: userId, 
-            slot: `${selectedDate} ${selectedSlot}`,
-            location_type: locationType,
-            status: ""
-        };
-
-        try {
-            const token = localStorage.getItem("token");
-            const res = await fetch("http://localhost:3001/appointment/book", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                },
-                body: JSON.stringify(appointmentData),
-            });
-
-            const result = await res.json();
-            if (!res.ok) throw new Error(result.message);
-            
-            setPopupMessage("Wait for appointment confirmation on Mail !");
-            setShowPopup(true);
-
-        } catch (error) {
-            console.error("Error booking appointment:", error);
-
-            setPopupMessage(error.message || "Failed to book appointment.");
-            setShowPopup(true);
-        }
-    };
-
-    return (
-        <div className={styles.bookingForm}>
-            <Location location={doctorLocation}  onLocationTypeChange={handleLocationTypeChange} />
-            <Calendar onDateSelect={setSelectedDate} className={styles.calendar} />
-            <Slots
-                className={styles.slotContainer}
-                shift={"Morning"}
-                slots_array={[
-                    "9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM",
-                    "11:00 AM", "11:30 AM", "12:00 PM", "12:30 PM"
-                ]}
-                booked_slots={[]}
-                img_url={"/sun.png"}
-                onSlotSelect={handleSlotSelect}
-                // onSlotSelect={(slot) => handleSlotSelect(slot, "Morning")}
-                selectedSlot={selectedSlot}            
-                />
-            <Slots
-                className={styles.slotContainer}
-                shift="Afternoon"
-                slots_array={[
-                    "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM",
-                    "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM"
-                ]}
-                booked_slots={[]}
-                img_url={"/sunset.png"}
-                onSlotSelect={handleSlotSelect}
-                // onSlotSelect={(slot) => handleSlotSelect(slot, "Morning")}
-                selectedSlot={selectedSlot}
-            />
-            <button className={styles.nextBtn} onClick={handleNext}>
-                Next
-            </button>
-
-            {showPopup && <Popup message={popupMessage} redirecting_path={'/appointments'} />}
-        </div>
-    );
-}
-
-*/
