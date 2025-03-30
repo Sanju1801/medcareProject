@@ -1,11 +1,26 @@
 'use client';
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "../styles/Location.module.css";
 
-export default function Location({ location}) {
+export default function Location({ location, onLocationTypeChange}) {
     const [toggle, setToggle] = useState(true);
-    const handleToggle = () => setToggle(!toggle);
+    const [locationType, setLocationType] = useState('online');
+
+    const handleToggle = () => {
+        setToggle((prevToggle) => {
+            const newToggle = !prevToggle;
+            setLocationType(newToggle ? "online" : "offline");
+            return newToggle;
+        });
+    };
+    
+
+    useEffect(() => {
+        if (onLocationTypeChange) {
+            onLocationTypeChange(locationType);
+        }
+    }, [locationType, onLocationTypeChange]);
 
     return (
         <div className={styles.container}>

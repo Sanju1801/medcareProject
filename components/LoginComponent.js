@@ -6,12 +6,14 @@ import Input_component from "./Input_component";
 import Button_component from "./Button_component";
 import Link from "next/link";
 
-const URL = "http://localhost:3001/login";
+const LOGIN_URL = "http://localhost:3001/login";
+const FORGOT_PASSWORD_URL = "http://localhost:3001/password/forgot";
 
 const LoginComponent = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
   const router = useRouter();
 
   const handleLogin = async (e) => {
@@ -22,7 +24,7 @@ const LoginComponent = () => {
     }
   
     try {
-      const response = await fetch(URL, { 
+      const response = await fetch(LOGIN_URL, { 
         method: "POST",
         headers: { "Content-Type": "application/json"},
         body: JSON.stringify({ email, password }),
@@ -30,15 +32,10 @@ const LoginComponent = () => {
   
       if(response.ok){
         const data = await response.json();
-        console.log("data===========", data);
 
         localStorage.setItem("token", data.token);
         localStorage.setItem("userId", data.user.id);
         localStorage.setItem("role", data.user.role);
-  
-        console.log("Token:", data.token);
-        console.log("User ID:", data.user.id);
-        console.log("User Role:", data.user.role);
   
         if (data.user.role === "admin") {
           router.replace("/adminDashboard");
@@ -54,6 +51,31 @@ const LoginComponent = () => {
       setError(err.message);
     }
   };
+
+//*********** sent bcrypted password on mail */
+
+  // const handleForgotPassword = async () => {
+  //   if (!email) {
+  //     setError("Please enter your email to reset your password.");
+  //     return;
+  //   }
+    
+  //   try {
+  //     const response = await fetch(FORGOT_PASSWORD_URL, {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ email }),
+  //     });
+      
+  //     if (response.ok) {
+  //       setMessage("Password reset email sent successfully!");
+  //     } else {
+  //       throw new Error("Failed to send password reset email");
+  //     }
+  //   } catch (err) {
+  //     setError(err.message);
+  //   }
+  // };
   
   // useEffect(() => {
   //   const token = localStorage.getItem("token");
@@ -110,8 +132,9 @@ const LoginComponent = () => {
               setError(""); 
             }}
           />
-          <a href="#"><p className={styles.forgot}>Forgot Password ?</p></a>
-        </section>
+          {/* <p className={styles.forgot} onClick={handleForgotPassword} style={{ cursor: "pointer" }}>Forgot Password?</p> */}
+          <p className={styles.forgot} >Forgot Password?</p>
+          </section>
       </div>
     </div>
   );
