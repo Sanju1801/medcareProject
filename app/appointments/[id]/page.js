@@ -12,13 +12,18 @@ export default function Profile() {
     const [doctor, setDoctor] = useState(null);
     const [loading, setLoading] = useState(true);
     const [reviewOpen, setReviewOpen] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     useEffect(() => {
         const token = localStorage.getItem("token");
+        const role = localStorage.getItem('role');
         console.log("token : ", token);
         if (!token) {
             router.push("/login");
             return;
+        }
+        if(role === 'admin'){
+            setIsAdmin(true);
         }
         fetchDoctorData(id, token);
     }, [id]);
@@ -104,6 +109,7 @@ export default function Profile() {
                     )}
                 </ul>
 
+                {!isAdmin &&
                 <div className={styles.btnContainer}>
                     <button
                         className={styles.bookBtn}
@@ -118,8 +124,8 @@ export default function Profile() {
                     >
                         Add Review
                     </button>
-
                 </div>
+                }
             </div>
             {reviewOpen && <Review doctorId={id} onClose={() => setReviewOpen(false)} setReviewOpen={setReviewOpen}/>}
             </div>

@@ -28,6 +28,8 @@ export default function Appointments() {
             
             const res = await response.json();
             setAppointments(res.data);
+            console.log(res.data)
+
         } catch (error) {
             console.error("Error fetching appointments:", error);
         }
@@ -83,8 +85,8 @@ export default function Appointments() {
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Doctor ID</th>
-                        <th>User ID</th>
+                        <th>Doctor</th>
+                        <th>User</th>
                         <th>Location</th>
                         <th>Slot Time</th>
                         <th>Actions</th>
@@ -100,13 +102,13 @@ export default function Appointments() {
                     ) : (
                         appointments.map((appointment) => (
                             <tr key={appointment.id}>
-                                <td>{appointment.id}</td>
+                            <td>{appointment.id}</td>
                                 <td>
                                     <Link href={`/appointments/${appointment.doctor_id}`} className={styles.doctorLink}>
-                                        {appointment.doctor_id}
+                                        {appointment.doctor_name}
                                     </Link>
                                 </td>
-                                <td>{appointment.user_id}</td>
+                                <td>{appointment.user_name}</td>
                                 <td>{appointment.location_type}</td>
                                 <td>{formatTime(appointment.slot)}</td>
                                 <td className={styles.actionButtons}>

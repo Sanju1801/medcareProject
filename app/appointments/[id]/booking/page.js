@@ -18,6 +18,7 @@ export default function Booking() {
 
   useEffect(() => {
     if (doctorId) {
+      
       fetchDoctorData(doctorId);
     }
   }, [doctorId]);
@@ -25,7 +26,12 @@ export default function Booking() {
   const fetchDoctorData = async (id) => {
     try {
       const token = localStorage.getItem("token");
+      const role = localStorage.getItem('role');
 
+      if(role && role === 'admin'){
+        router.push("/adminDashboard");
+        return;
+      }
       const res = await fetch(`http://localhost:3001/doctors/profile/${id}`, {
         method: "GET",
         headers: {
@@ -55,7 +61,7 @@ export default function Booking() {
   };
 
   if (loading) return <p>Loading...</p>;
-  if (!doctor) return <p >User not logged in. Redirecting...</p>;
+  if (!doctor) return <p >User is not authenticated. Redirecting...</p>;
 
   return (
     <div>

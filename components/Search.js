@@ -14,10 +14,16 @@ export default function Search({ setFilters , filters}) {
         setFilters((prev) => ({ ...prev, searchQuery: searchTerm }));
     };
 
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            handleSearch();
+        }
+    };
+
     return (
         <div className={styles.searchSection}>
             <h3 className={styles.searchTitle}>Find a doctor at your own ease</h3>
-            <div className={styles.searchBox}>
+            <div className={styles.searchBox} >
                 <div className={styles.searchIcon}>
                     <Image src="/search_lens.png" alt="Search icon" width={16} height={16} layout="fixed" />
                 </div>
@@ -27,6 +33,7 @@ export default function Search({ setFilters , filters}) {
                     className={styles.searchField}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
+                    onKeyDown={handleKeyDown}
                 />
                 <button className={styles.searchBtn} onClick={handleSearch}>Search</button>
             </div>
