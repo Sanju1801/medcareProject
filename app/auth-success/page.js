@@ -25,10 +25,6 @@ export default function AuthSuccess() {
     }, []);
 
     return (
-        // <div style={{ textAlign: "center", marginTop: "50px" }}>
-        //     <h2>Authenticating...</h2>
-        //     <p>Please wait while we log you in.</p>
-        // </div>
         <Popup message={message} redirecting_path={isToken ? "/appointments" : "/login" }/>
     );
 }

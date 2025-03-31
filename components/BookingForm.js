@@ -77,7 +77,7 @@ export default function BookingForm({ doctor }) {
         const res = await result.json();
         if (res.success) {
           const bookedSlots = res.data
-            .filter((item) => item.slot.split("T")[0] === selectedDate)   // Extract date from ISO string
+            .filter((item) => item.slot.split("T")[0] === selectedDate)
             .map((item) => new Date(item.slot).toLocaleTimeString([], 
               { hour: "2-digit", minute: "2-digit", hour12: true }).toUpperCase());
 
@@ -168,7 +168,7 @@ export default function BookingForm({ doctor }) {
         selectedSlot={selectedShift === "Afternoon" ? selectedSlot : null}
       />
       <button className={styles.nextBtn} onClick={handleNext}>
-        Next
+        Book Appointment
       </button>
       {showPopup && <Popup message={popupMessage} redirecting_path={'/appointments'} />}
     </div>

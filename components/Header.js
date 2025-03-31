@@ -11,13 +11,17 @@ export default function Header() {
     const pathname = usePathname();
     const [menuOpen, setMenuOpen] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
 
     const checkToken = () => {
         const token = localStorage.getItem("token");
         if (!token) {
             setIsLoggedIn(false);
+            setIsAdmin(false);
             return;
         }
+
+        const role = localStorage.getItem("role");
 
         try {
             const payload = jwtDecode(token); 
@@ -25,6 +29,7 @@ export default function Header() {
                 handleLogout(); 
             } else {
                 setIsLoggedIn(true);
+                setIsAdmin(role === 'admin');
             }
         } catch (error) {
             console.error("Invalid token:", error);
@@ -41,7 +46,7 @@ export default function Header() {
 
     useEffect(() => {
         checkToken();
-      }, [pathname, menuOpen]);
+      }, [pathname, menuOpen, isAdmin]);
 
     return (
         <header className={styles.header}>
@@ -54,7 +59,8 @@ export default function Header() {
                     </div>
 
                     {/* Nav bar links */}
-                    <ul className={`${styles.navLinks} ${menuOpen ? styles.active : ''}`}>
+                    {!isAdmin ? (<>
+                        <ul className={`${styles.navLinks} ${menuOpen ? styles.active : ''}`}>
                         <li className={pathname === '/' ? styles.active : ''}>
                             <Link href="/">Home</Link>
                         </li>
@@ -75,6 +81,30 @@ export default function Header() {
                             </li>
                         )}
                     </ul>
+                    </> ) : (<>
+                        <ul className={`${styles.navLinks} ${menuOpen ? styles.active : ''}`}>
+                        <li className={pathname === '/adminDashboard' ? styles.active : ''}>
+                            <Link href="/adminDashboard">Dashboard</Link>
+                        </li>
+                        <li className={pathname === '/adminAppointments' ? styles.active : ''}>
+                            <Link href="/adminAppointments">Appointments</Link>
+                        </li>
+                        <li className={pathname === '/doctor' ? styles.active : ''}>
+                            <Link href="/doctor">Doctors</Link>
+                        </li>
+                        <li className={pathname === '/contact' ? styles.active : ''}>
+                            <Link href="/contact">Contact</Link>
+                        </li>
+                        {menuOpen && isLoggedIn && (
+                            <li className={styles.mobileLogout}>
+                                <button onClick={handleLogout} className={styles.logoutBtn}>
+                                    Logout
+                                </button>
+                            </li>
+                        )}
+                    </ul>
+                    </> )
+}
                 </div>
 
                 {/* Hamburger Icon for small screens */}

@@ -49,7 +49,7 @@ export default function DoctorForm() {
                 body: JSON.stringify(formData),
             });
 
-            if (!response.ok) throw new Error("Failed to add doctor");
+            if (!response.ok) throw new Error("All fields are required");
 
             setPopupMessage("Doctor added successfully !");
             setShowPopup(true);
@@ -72,7 +72,7 @@ export default function DoctorForm() {
                         img_url="./name.svg"
                         placeholder_name="Enter Doctor's Name"
                         value={name}
-                        change={setName} // Pass the setter function
+                        change={setName} 
                     />
                     <InputComponent
                         LabelName="Title (expertise)"

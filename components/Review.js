@@ -2,16 +2,10 @@
 import styles from '@/styles/review.module.css';
 import React, { useState } from 'react';
 
-// export default function Review( { doctorId, onClose }) {
-    export default function Review( { doctorId,onClose, setReviewOpen }) {
+export default function Review( { doctorId,onClose, setReviewOpen }) {
         const [rating, setRating] = useState(1);
     const [review, setReview] = useState('');
     const [message, setMessage] = useState('');
-
-
-    // const handleReview = () => {
-    //     setReviewOpen(() => true);
-    // }
 
     const handleSubmit = async (e) => {
         e.preventDefault();

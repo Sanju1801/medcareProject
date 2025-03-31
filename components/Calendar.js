@@ -37,18 +37,15 @@ export default function Calendar({ onDateSelect }) {
         <div className={styles.container}>
 
             <div className={styles.month}>
-                {/* <button className={styles.navButton} onClick={scrollLeft}>‹</button> */}
                 <span className={styles.monthTitle}>
                 {new Date(selectedDate).toLocaleDateString("en-US", { month: "long", year: "numeric" })}
                 </span>
-                {/* <button className={styles.navButton} onClick={scrollRight}>›</button> */}
             </div>
 
             <div className={styles.dateWrapper}>
                 <button className={styles.navButton} onClick={scrollLeft}>‹</button>
 
                 <div className={styles.dateContainer} ref={dateContainerRef}>
-                {/* <div className={styles.dateList}> */}
                     {dates.map(({ day, date, fullDate }) => (
                         <div
                             key={fullDate}

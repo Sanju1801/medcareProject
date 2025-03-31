@@ -34,7 +34,6 @@
   padding: 0 6px;
   font-size: 16px;
   cursor: pointer;
-  /* padding: 4px; */
 }
 
 .navButton:hover {
@@ -93,26 +92,4 @@
       gap: 5px;
     }
   
-    /* .navButton {
-      font-size: 18px;
-    }
-  
-    .monthTitle {
-      font-size: 14px;
-    }
-
-    .dateList {
-    gap: 4px;
-    padding: 4px;
-  } */
-
-  /* .dateItem {
-    width: 60px;
-    height: 30px;
-    padding: 2px;
-  }
-
-  .day, .date {
-    font-size: 12px;
-  } */
 }

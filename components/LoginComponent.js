@@ -59,6 +59,10 @@ const LoginComponent = () => {
     }
   }, []);
 
+  const handleGoogleSignup = () => {
+    window.location.href = "http://localhost:3001/google";
+  };
+
   const isResetDisabled = !email && !password;
 
 //*********** sent bcrypted password on mail *****************************/
@@ -124,6 +128,7 @@ const LoginComponent = () => {
             isPasswordFlag = {true} 
           />
           <Button_component text="Login" color="#1C4A2A" onClick={handleLogin}/>
+          <Button_component text="Google Signup" color="rgb(97, 180, 228)" onClick={handleGoogleSignup} />
           <Button_component
             text="Reset"
             color="#C6B09A"
@@ -135,7 +140,6 @@ const LoginComponent = () => {
             }}
           />
           {/* <p className={styles.forgot} onClick={handleForgotPassword} style={{ cursor: "pointer" }}>Forgot Password?</p> */}
-          <p className={styles.forgot} >Forgot Password?</p>
           </section>
       </div>
     </div>
