@@ -72,7 +72,7 @@ export default function Appointment() {
         <>
             <CheckAuth />
             <div className={styles.mainContainer}>
-                <Search setFilters={handleFilterChange} />
+                <Search filters={filters} setFilters={handleFilterChange} />
                 <div className={styles.title}>
                     <h1>{totalDoctors} doctors available</h1>
                     <p>Book appointment with minimum wait-time & verified doctor details</p>
