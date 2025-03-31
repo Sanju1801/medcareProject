@@ -29,9 +29,9 @@ const SignupComponent = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
       });
+      const data = await response.json();
 
       if(response.ok){
-        const data = await response.json();
         localStorage.setItem("token", data.token);
         console.log("Token:", data.token);
 

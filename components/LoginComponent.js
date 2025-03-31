@@ -29,9 +29,9 @@ const LoginComponent = () => {
         headers: { "Content-Type": "application/json"},
         body: JSON.stringify({ email, password }),
       });
-  
+      const data = await response.json();
+
       if(response.ok){
-        const data = await response.json();
 
         localStorage.setItem("token", data.token);
         localStorage.setItem("userId", data.user.id);
@@ -52,7 +52,16 @@ const LoginComponent = () => {
     }
   };
 
-//*********** sent bcrypted password on mail */
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      router.replace("/appointments");
+    }
+  }, []);
+
+  const isResetDisabled = !email && !password;
+
+//*********** sent bcrypted password on mail *****************************/
 
   // const handleForgotPassword = async () => {
   //   if (!email) {
@@ -76,16 +85,9 @@ const LoginComponent = () => {
   //     setError(err.message);
   //   }
   // };
+
+  //********************************************************************* */
   
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   if (token) {
-  //     router.replace("/appointments");
-  //   }
-  // }, []);
-
-  const isResetDisabled = !email && !password;
-
   return (
     <div className={styles.container} onClick={() => setError("")}>
       <div className={`${styles.fields} ${styles.loginFields}`}>

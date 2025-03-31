@@ -29,11 +29,13 @@
 
 .titleContainer p {
   font-size: .9rem;
-  font-weight: 500;
+  font-weight: 200;
+  line-height: 180%;
 }
 
 .startBtn {
   padding: 8px 24px;
+  color: #1C4A2A;
   background-color: white;
   border-radius: 8px;
   width: fit-content;
@@ -44,7 +46,6 @@
 
 .startBtn a {
   text-decoration: none;
-  color: black;
 }
 
 .rightContainer {

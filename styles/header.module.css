@@ -65,16 +65,6 @@
   text-decoration: none;
 }
 
-.ambulanceLink {
-  margin-left: 40px;
-  cursor: pointer;
-}
-
-.ambulanceLink:hover {
-  transform: scale(1.1);
-}
-
-
 .navBtns {
   display: flex;
   gap: 8px;
@@ -84,12 +74,12 @@
   border-radius: 8px;
   margin: 0 6px;
   padding: 6px 24px;
-  font-weight: 200;
+  font-weight: 500;
   cursor: pointer;
   transition: 0.3s;
-  border: 1px solid #E0E8E0;
-  background: none;
-  color: black;
+  border: 1.5px solid #E0E8E0;
+  background: white;
+  color: #0E2515;
 }
 
 .activeBtn {
@@ -98,9 +88,8 @@
 }
 
 .inactiveBtn {
-  border: 1px solid #E0E8E0;
-  background: #E0E8E0;
-  color: black;
+  background: white;
+  color: #0E2515;
 }
 
 .inactiveBtn:hover {

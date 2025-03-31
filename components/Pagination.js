@@ -13,7 +13,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
             </span>
             <button
                 className={styles.btn}
-                disabled={currentPage === totalPages}
+                disabled={currentPage >= totalPages}
                 onClick={() => onPageChange(currentPage + 1)}>
                 Next ›</button>
         </div>

@@ -2,10 +2,16 @@
 import styles from '@/styles/review.module.css';
 import React, { useState } from 'react';
 
-export default function Review( { doctorId, onClose }) {
-    const [rating, setRating] = useState(1);
+// export default function Review( { doctorId, onClose }) {
+    export default function Review( { doctorId,onClose, setReviewOpen }) {
+        const [rating, setRating] = useState(1);
     const [review, setReview] = useState('');
     const [message, setMessage] = useState('');
+
+
+    // const handleReview = () => {
+    //     setReviewOpen(() => true);
+    // }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -29,6 +35,10 @@ export default function Review( { doctorId, onClose }) {
             if (!response.ok) throw new Error('Failed to submit review');
 
             setMessage('Review submitted successfully!');
+            setReviewOpen(setTimeout(() => {
+                setReviewOpen(false);
+              }, 2000));
+              
             setRating(1);
             setReview('');
         } 

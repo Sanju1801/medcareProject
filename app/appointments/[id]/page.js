@@ -121,7 +121,8 @@ export default function Profile() {
 
                 </div>
             </div>
-            {reviewOpen && <Review doctorId={id} onClose={() => setReviewOpen(false)}/>}
-        </div>
+            {/* {reviewOpen && <Review doctorId={id} onClose={() => setReviewOpen(false)}/>} */}
+            {reviewOpen && <Review doctorId={id} onClose={() => setReviewOpen(false)} setReviewOpen={setReviewOpen}/>}
+            </div>
     );
 }

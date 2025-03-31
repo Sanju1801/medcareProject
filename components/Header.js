@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
@@ -19,7 +20,7 @@ export default function Header() {
         }
 
         try {
-            const payload = JSON.parse(atob(token.split(".")[1])); 
+            const payload = jwtDecode(token); 
             if (payload.exp * 1000 < Date.now()) {
                 handleLogout(); 
             } else {
